@@ -45,9 +45,6 @@ public class UserService {
             return user.get();
         } else {
             User u = new User();
-            u.setEmail(email);
-            u.setPassword(password);
-            u.setName("NO DEFINIDO");
             return u;
         }
     }

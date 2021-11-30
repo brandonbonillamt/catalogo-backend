@@ -46,10 +46,14 @@ public class UserController {
         return service.getAll();
     }
     
-    
+    /**
+     * Endpoint para obtener un user especifico
+     * @param id El id del user a buscar
+     * @return El user buscado
+     */
     @GetMapping("/{id}")
-    public Optional<User> getById(@PathVariable("id") int id) {
-        return service.getById(id);
+    public Optional<User> getById(@PathVariable("id") int idUser) {
+        return service.getById(idUser);
     }
     
     /**
