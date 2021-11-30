@@ -25,8 +25,6 @@ public class User {
     private Integer id;
     private String identification;
     private String name;
-    private Date birthday;
-    private String monthBirthDay;
     private String address;
     private String cellPhone;
     private String email;
