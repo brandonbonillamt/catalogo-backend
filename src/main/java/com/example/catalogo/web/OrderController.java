@@ -5,8 +5,8 @@
  */
 package com.example.catalogo.web;
 
-import com.example.catalogo.modelo.Gadget;
-import com.example.catalogo.servicios.GadgetService;
+import com.example.catalogo.modelo.Order;
+import com.example.catalogo.servicios.OrderService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,37 +27,42 @@ import org.springframework.web.bind.annotation.RestController;
  * @author DELL - PC
  */
 @RestController
-@RequestMapping("api/gadget")
+@RequestMapping("api/order")
 @CrossOrigin
-public class GadgetController {
+public class OrderController {
     @Autowired
-    private GadgetService service;
+    private OrderService service;
     
     @GetMapping("/all")
-    public List<Gadget> getAll() {
+    public List<Order> getAll() {
         return service.getAll();
     }
     
     @GetMapping("/{id}")
-    public Optional<Gadget> getById(@PathVariable("id") int id) {
+    public Optional<Order> getById(@PathVariable("id") int id) {
         return service.getById(id);
+    }
+    
+    @GetMapping("/zona/{zone}")
+    public List<Order> getByZone(@PathVariable("zone") String zone) {
+        return service.getByZone(zone);
     }
     
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Gadget save(@RequestBody Gadget gadget) {
-        return service.save(gadget);
+    public Order save(@RequestBody Order order) {
+        return service.save(order);
     }
     
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Gadget update(@RequestBody Gadget gadget) {
-        return service.update(gadget);
+    public Order update(@RequestBody Order order) {
+        return service.update(order);
     }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int idGadget) {
-        service.delete(idGadget);
+    public void delete(@PathVariable("id") int id) {
+        service.delete(id);
     }
 }

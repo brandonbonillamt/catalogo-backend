@@ -6,7 +6,7 @@
 package com.example.catalogo.repositorios;
 
 import com.example.catalogo.modelo.User;
-import com.example.catalogo.repositorios.crud.UserCrudRepository;
+import com.example.catalogo.crud.UserCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserRepository {
     private UserCrudRepository crud;
     
     public List<User> getAll() {
-        return (List<User>) crud.findAll();
+        return crud.findAll();
     }
     
     public Optional<User> getById(int id) {

@@ -5,8 +5,8 @@
  */
 package com.example.catalogo.repositorios;
 
-import com.example.catalogo.modelo.Gadget;
-import com.example.catalogo.crud.GadgetCrudRepository;
+import com.example.catalogo.crud.OrderCrudRepository;
+import com.example.catalogo.modelo.Order;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +17,27 @@ import org.springframework.stereotype.Repository;
  * @author DELL - PC
  */
 @Repository
-public class GadgetRepository {
-
+public class OrderRepository {
     @Autowired
-    private GadgetCrudRepository crud;
-
-    public List<Gadget> getAll() {
+    private OrderCrudRepository crud;
+    
+    public List<Order> getAll() {
         return crud.findAll();
     }
-
-    public Optional<Gadget> getById(int id) {
+    
+    public Optional<Order> getById(int id) {
         return crud.findById(id);
     }
-
-    public Gadget save(Gadget gadget) {
-        return crud.save(gadget);
+    
+    public Order save(Order order) {
+        return crud.save(order);
     }
-
-    public void delete(Gadget gadget) {
-        crud.delete(gadget);
+    
+    public void delete(Order order) {
+        crud.delete(order);
+    }
+    
+    public List<Order> getByZone(String zone) {
+        return crud.findByZone(zone);
     }
 }
