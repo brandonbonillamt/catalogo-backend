@@ -7,6 +7,7 @@ package com.example.catalogo.repositorios;
 
 import com.example.catalogo.crud.OrderCrudRepository;
 import com.example.catalogo.modelo.Order;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,18 @@ public class OrderRepository {
     
     public Optional<Order> getById(int id) {
         return crud.findById(id);
+    }
+    
+    public List<Order> getBySalesMan(int idSalesMan) {
+        return crud.findBySalesManId(idSalesMan);
+    }
+    
+    public List<Order> getByStatusAndSalesMan(String status, int idSalesMan) {
+        return crud.findByStatusAndSalesManId(status, idSalesMan);
+    }
+    
+    public List<Order> getByDateAndSalesMan(Date date, int idSalesMan) {
+        return crud.findByDateAndSalesManId(date, idSalesMan);
     }
     
     public Order save(Order order) {
