@@ -39,7 +39,7 @@ public class OrderRepository {
     }
     
     public List<Order> getByDateAndSalesMan(Date date, int idSalesMan) {
-        return crud.findByDateAndSalesManId(date, idSalesMan);
+        return crud.findByRegisterDayAndSalesManId(date, idSalesMan);
     }
     
     public Order save(Order order) {

@@ -29,6 +29,14 @@ public class GadgetRepository {
     public Optional<Gadget> getById(int id) {
         return crud.findById(id);
     }
+    
+    public List<Gadget> getByPrice(Double price) {
+        return crud.findByPrice(price);
+    }
+    
+    public List<Gadget> getByDesc(String desc) {
+        return crud.findByDescription(desc);
+    }
 
     public Gadget save(Gadget gadget) {
         return crud.save(gadget);

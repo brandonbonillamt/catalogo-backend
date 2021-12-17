@@ -6,7 +6,9 @@
 package com.example.catalogo.crud;
 
 import com.example.catalogo.modelo.Gadget;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -14,4 +16,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer>{
     
+    @Query("{ 'price': { $lte: ?0 } }")
+    public List<Gadget> findByPrice(Double price);
+    
+    @Query("{ 'description': { $regex: /?0/, $options: 'i' } }")
+    public List<Gadget> findByDescription(String descript);
 }

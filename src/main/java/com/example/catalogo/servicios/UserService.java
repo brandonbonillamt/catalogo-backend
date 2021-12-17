@@ -14,90 +14,125 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author DELL - PC
+ * @author BRABDAR
  */
 @Service
 public class UserService {
-        
+
+    /**
+     * Crea un un user repository para funiones CRUD
+     */
     @Autowired
     private UserRepository repo;
-    
+
+    /**
+     * Llama a los usuarios de la base de datos
+     * @return Lista de los usuarios
+     */
     public List<User> getAll() {
         return repo.getAll();
     }
-    
-    public Optional<User> getById(int id) {
-        return repo.getById(id);
+
+    /**
+     * Llama a un user por su id
+     * @param idUser El id del usuario a buscar
+     * @return EL usuario con el id pedido
+     */
+    public Optional<User> getById(int idUser) {
+        return repo.getById(idUser);
     }
-    
+
+    /**
+     * Revisa si existe un usuario con un email especifico
+     * @param email El email que desea revisar
+     * @return true si existe o false si no existe
+     */
     public boolean checkEmail(String email) {
         Optional<User> user = repo.getByEmail(email);
-        if (user.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.isPresent();
     }
-    
+
+    /**
+     * Busca a un usuario con el email y la clave especificados
+     * @param email el email del usuario
+     * @param password la clave del usuario
+     * @return si existe retorna el usuario que coincida
+     */
     public User getByEmailAndPassword(String email, String password) {
         Optional<User> user = repo.getByEmailAndPassword(email, password);
         if (user.isPresent()) {
             return user.get();
         } else {
-            User u = new User();
-            return u;
+            return new User();
         }
     }
     
+    public List<User> getByMonthBirthday(String month) {
+        return repo.getByMonthBirthday(month);
+    }
+
+    /**
+     * Función CRUD create
+     * @param user el usuario a registrar
+     * @return el usuario registrado
+     */
     public User save(User user) {
         return repo.save(user);
     }
-    
+
+    /**
+     * Función CRUD update
+     * @param user el usuario con los datos a actualizar
+     * @return los datos actualizados
+     */
     public User update(User user) {
         if (user.getId() != null) {
-            Optional<User> u = repo.getById(user.getId());
-            if (u.isPresent()) {
+            Optional<User> iusaa = repo.getById(user.getId());
+            if (iusaa.isPresent()) {
                 if (user.getIdentification() != null) {
-                    u.get().setIdentification(user.getIdentification());
+                    iusaa.get().setIdentification(user.getIdentification());
                 }
                 if (user.getName() != null) {
-                    u.get().setName(user.getName());
+                    iusaa.get().setName(user.getName());
                 }
                 if (user.getBirthtDay() != null) {
-                    u.get().setBirthtDay(user.getBirthtDay());
+                    iusaa.get().setBirthtDay(user.getBirthtDay());
                 }
                 if (user.getMonthBirthtDay() != null) {
-                    u.get().setMonthBirthtDay(user.getMonthBirthtDay());
+                    iusaa.get().setMonthBirthtDay(user.getMonthBirthtDay());
                 }
                 if (user.getAddress() != null) {
-                    u.get().setAddress(user.getAddress());
+                    iusaa.get().setAddress(user.getAddress());
                 }
                 if (user.getCellPhone() != null) {
-                    u.get().setCellPhone(user.getCellPhone());
+                    iusaa.get().setCellPhone(user.getCellPhone());
                 }
                 if (user.getEmail() != null) {
-                    u.get().setEmail(user.getEmail());
+                    iusaa.get().setEmail(user.getEmail());
                 }
                 if (user.getPassword() != null) {
-                    u.get().setPassword(user.getPassword());
+                    iusaa.get().setPassword(user.getPassword());
                 }
                 if (user.getZone() != null) {
-                    u.get().setZone(user.getZone());
+                    iusaa.get().setZone(user.getZone());
                 }
                 if (user.getType() != null) {
-                    u.get().setType(user.getType());
+                    iusaa.get().setType(user.getType());
                 }
-                return repo.save(u.get());
+                return repo.save(iusaa.get());
             }
         }
         return user;
     }
-    
-    public boolean delete(int id) {
-        Boolean b = repo.getById(id).map(user -> {
-            repo.delete(user);
-            return true;
-        }).orElse(false);
-        return b;
+
+    /**
+     * Función CRUD delete
+     * @param idUser id del usuario a eliminar
+     */
+    public void delete(int idUser) {
+        Optional<User> user = repo.getById(idUser);
+        if (user.isPresent()) {
+            repo.delete(user.get());
+        }
     }
 }

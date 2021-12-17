@@ -43,6 +43,16 @@ public class GadgetController {
         return service.getById(id);
     }
     
+    @GetMapping("/price/{precio}")
+    public List<Gadget> getByPrice(@PathVariable("precio") Double price) {
+        return service.getByPrice(price);
+    }
+    
+    @GetMapping("/description/{texto}")
+    public List<Gadget> getByDesc(@PathVariable("texto") String desc) {
+        return service.getByDesc(desc);
+    }
+    
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Gadget save(@RequestBody Gadget gadget) {

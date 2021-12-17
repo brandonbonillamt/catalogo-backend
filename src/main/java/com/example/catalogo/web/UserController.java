@@ -48,7 +48,7 @@ public class UserController {
     
     /**
      * Endpoint para obtener un user especifico
-     * @param id El id del user a buscar
+     * @param idUser El id del user a buscar
      * @return El user buscado
      */
     @GetMapping("/{id}")
@@ -77,6 +77,11 @@ public class UserController {
         return service.getByEmailAndPassword(email, password);
     }
     
+    @GetMapping("/birthday/{mes}")
+    public List<User> getByMonthBirthday(@PathVariable("mes") String month) {
+        return service.getByMonthBirthday(month);
+    }
+    
     /**
      * Endpoint para guardar un nuevo user
      * @param user El user con la información requerida
@@ -102,11 +107,10 @@ public class UserController {
     /**
      * Endpoint para eliminar un user
      * @param idUser Id del user a eliminar
-     * @return True si la eliminación fue exitosa
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int idUser) {
-        return service.delete(idUser);
+    public void delete(@PathVariable("id") int idUser) {
+        service.delete(idUser);
     }
 }

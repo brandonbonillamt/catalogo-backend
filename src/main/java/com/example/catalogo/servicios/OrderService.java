@@ -42,6 +42,7 @@ public class OrderService {
     }
 
     public List<Order> getByDateAndSalesMan(String date, int idSalesMan) {
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date stringToDate = new Date();
         try {

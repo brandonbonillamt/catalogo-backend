@@ -30,6 +30,14 @@ public class GadgetService {
         return repo.getById(id);
     }
     
+    public List<Gadget> getByPrice(Double price) {
+        return repo.getByPrice(price);
+    }
+    
+    public List<Gadget> getByDesc(String desc) {
+        return repo.getByDesc(desc);
+    }
+    
     public Gadget save(Gadget gadget) {
         return repo.save(gadget);
     }
